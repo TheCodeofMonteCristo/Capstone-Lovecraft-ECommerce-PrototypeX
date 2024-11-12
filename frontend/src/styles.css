@@ -1,0 +1,77 @@
+/* src/styles.css */
+
+/* Navbar Styles */
+.navbar {
+    background-color: #333;
+    padding: 1rem;
+  }
+  .navbar-links {
+    list-style-type: none;
+    display: flex;
+    gap: 15px;
+  }
+  .navbar-links li a {
+    color: white;
+    text-decoration: none;
+  }
+  
+  /* CityCard Styles */
+  .city-card {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    display: flex;
+    gap: 20px;
+  }
+  .city-card-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+  .city-card-info h3 {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+  .city-card-info p {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  /* ReviewForm Styles */
+  .review-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .review-form textarea {
+    width: 100%;
+    height: 100px;
+  }
+  .review-form button {
+    align-self: flex-start;
+    background-color: #007bff;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* LoadingSpinner Styles */
+  .loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
