@@ -1,0 +1,75 @@
+// prisma/schema.prisma
+
+// Define the database provider (Postgres in this case)
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Database connection
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL") // The database URL will be set in the .env file
+}
+
+// Define the City model
+model City {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  country   String
+  population Int
+  price     Float
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relationship with orders
+  orders    Order[]   @relation("CityOrders")
+  // Relationship with reviews
+  reviews   Review[]
+}
+
+// Define the User model
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  username  String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relationship with orders
+  orders    Order[]
+  // Relationship with reviews
+  reviews   Review[]
+}
+
+// Define the Order model
+model Order {
+  id        Int      @id @default(autoincrement())
+  status    String   // E.g., "pending", "shipped", "delivered"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Many-to-many relationship with cities
+  cities    City[]   @relation("CityOrders")
+
+  // Relationship with user
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+// Define the Review model
+model Review {
+  id        Int      @id @default(autoincrement())
+  content   String   // Review content
+  rating    Int      // Rating out of 5
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relationship with city
+  cityId    Int
+  city      City     @relation(fields: [cityId], references: [id])
+
+  // Relationship with user
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+}
